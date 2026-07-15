@@ -1,0 +1,45 @@
+POST 2: Carousel
+
+The surface a soap film would choose
+
+Images (in order):
+
+
+Gyroid_v6.png (book name: "Gyroid I")
+Gyroid_v4.png (book name: "Gyroid II")
+
+
+Instagram
+
+On-image text (optional overlay):
+
+
+Slide 1: "No straight lines. No flat spots."
+Slide 2: "Every single point is a saddle."
+
+
+Caption:
+Dip two rings into soapy water and the film that stretches between them pulls itself into the leanest shape possible, using the least surface it can. Mathematicians call these minimal surfaces, and nature loves them because minimal means efficient.
+
+The gyroid is one of the most beautiful members of the family. It is a triply periodic minimal surface, which means it repeats endlessly in all three directions of space, weaving through itself without ever touching. It contains no straight lines and no flat planes at all. Look at any point on it and you find a saddle, curving up one way and down the other at the same time. This is not just a mathematical curiosity either. The gyroid shows up in real cell membranes, in insect wings, and in the skeletons of certain sea creatures.
+
+From the chapter on surfaces and folding in [Book Title].
+
+Hashtags:
+#mathart #gyroid #minimalsurface #generativeart #geometry #mathematics #sciart #mathisbeautiful #tpms #digitalart #mathematicalart #naturepatterns
+
+Alt text (per slide):
+
+
+Slide 1: A smooth, continuously curving gyroid surface weaving through space in a repeating three dimensional lattice, with no straight edges and open channels running through it.
+Slide 2: A second view of a gyroid minimal surface, its saddle shaped walls twisting and interlocking into a periodic labyrinth like structure.
+
+
+Pinterest
+
+Title: The Gyroid: A Minimal Surface Found in Nature
+
+Description:
+A minimal surface is the leanest shape possible, the kind a soap film pulls itself into to use the least area. The gyroid is a triply periodic minimal surface that repeats endlessly in all three directions, with no straight lines and no flat planes, where every point is shaped like a saddle. It appears in real cell membranes, insect wings, and the skeletons of some sea animals. Mathematical art from the surfaces chapter of [Book Title].
+
+Alt text (per image): Use the two descriptions listed under the Instagram section above.
