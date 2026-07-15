@@ -43,13 +43,21 @@
   }
 
   /* Eyebrow */
+  .eyebrow-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding-top: 64px;
+    flex-wrap: wrap;
+  }
+
   .eyebrow {
     font-family: 'Inter', sans-serif;
     font-size: 12px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--muted);
-    padding-top: 64px;
     opacity: 0;
     animation: rise 0.7s ease-out 0.1s forwards;
   }
@@ -219,16 +227,18 @@
 
   .social-icons {
     display: flex;
-    gap: 14px;
+    gap: 12px;
     align-items: center;
+    opacity: 0;
+    animation: rise 0.7s ease-out 0.1s forwards;
   }
 
   .social-icons a {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 30px;
-    height: 30px;
+    width: 26px;
+    height: 26px;
     border-radius: 50%;
     border: 1px solid var(--line);
     color: var(--muted);
@@ -242,8 +252,8 @@
   }
 
   .social-icons img {
-    width: 15px;
-    height: 15px;
+    width: 13px;
+    height: 13px;
     object-fit: contain;
     filter: grayscale(1) opacity(0.75);
     transition: filter 0.2s;
@@ -263,7 +273,7 @@
   }
 
   @media (max-width: 560px) {
-    .eyebrow { padding-top: 48px; }
+    .eyebrow-row { padding-top: 48px; }
     .hero-row { margin-top: 18px; }
     .signup-box { flex: 1 1 100%; }
     footer { flex-direction: column; gap: 14px; align-items: flex-start; }
@@ -273,7 +283,20 @@
 <body>
 
   <div class="frame">
-    <div class="eyebrow">Bernardo Zamora &nbsp; · &nbsp; Mathematics &amp; Physics Meets Art </div>
+    <div class="eyebrow-row">
+      <div class="eyebrow">Bernardo Zamora &nbsp; · &nbsp; Mathematics &amp; Physics Meets Art </div>
+      <div class="social-icons">
+        <a href="https://instagram.com/bernardozamora.art" target="_blank" rel="noopener" aria-label="Instagram">
+          <img src="instagram.svg" alt="Instagram">
+        </a>
+        <a href="https://pinterest.com/bernardozamora" target="_blank" rel="noopener" aria-label="Pinterest">
+          <img src="pinterest.svg" alt="Pinterest">
+        </a>
+        <a href="https://tiktok.com/@bernardo_zamora" target="_blank" rel="noopener" aria-label="TikTok">
+          <img src="tiktok.svg" alt="TikTok">
+        </a>
+      </div>
+    </div>
 
     <h1>Look behind the curtain!</h1>
 
@@ -358,18 +381,6 @@
 
   <footer>
     <span>&copy; 2020-2026 Bernardo Zamora</span>
-    <div class="social-icons">
-      <!-- Replace src with real logo files once uploaded, e.g. /assets/instagram.svg -->
-      <a href="https://instagram.com/bernardozamora.art" target="_blank" rel="noopener" aria-label="Instagram">
-        <img src="instagram.svg" alt="Instagram">
-      </a>
-      <a href="https://pinterest.com/bernardozamora" target="_blank" rel="noopener" aria-label="Pinterest">
-        <img src="pinterest.svg" alt="Pinterest">
-      </a>
-      <a href="https://tiktok.com/@bernardo_zamora" target="_blank" rel="noopener" aria-label="TikTok">
-        <img src="tiktok.svg" alt="TikTok">
-      </a>
-    </div>
   </footer>
 
 </body>
