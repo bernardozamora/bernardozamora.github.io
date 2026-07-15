@@ -14,6 +14,7 @@
     --line: #d8d6d0;
     --accent: #5c6b73;
     --muted: #6b6a64;
+    --card: #f2f1ec;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -64,21 +65,109 @@
     animation: rise 0.8s ease-out 0.25s forwards;
   }
 
+  /* Hero row: intro text + signup card side by side */
+  .hero-row {
+    display: flex;
+    gap: 48px;
+    align-items: flex-start;
+    margin-top: 22px;
+    flex-wrap: wrap;
+  }
+
   .tagline {
     font-family: 'Inter', sans-serif;
     font-size: clamp(0.95rem, 1.6vw, 1.05rem);
     color: var(--muted);
-    max-width: 540px;
-    margin-top: 18px;
-    line-height: 1.55;
+    max-width: 560px;
+    line-height: 1.65;
+    flex: 1 1 380px;
     opacity: 0;
     animation: rise 0.8s ease-out 0.4s forwards;
   }
 
-  /* Image plate */
+  /* Email signup card */
+  .signup-box {
+    flex: 0 1 320px;
+    min-width: 260px;
+    border: 1px solid var(--line);
+    background: var(--card);
+    padding: 24px;
+    opacity: 0;
+    animation: rise 0.8s ease-out 0.5s forwards;
+  }
+
+  .signup-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .signup-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--ink);
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+
+  .signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .signup-form input[type="email"] {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    outline: none;
+  }
+
+  .signup-form input[type="email"]:focus {
+    border-color: var(--accent);
+  }
+
+  .signup-form button {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 10px 12px;
+    background: var(--accent);
+    color: var(--paper);
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .signup-form button:hover {
+    background: var(--ink);
+  }
+
+  .signup-note {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 10px;
+  }
+
+  /* Image plates */
+  .plates {
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+    margin-top: 56px;
+    margin-bottom: 80px;
+  }
+
   .plate {
     position: relative;
-    margin-top: 56px;
     border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
     opacity: 0;
@@ -100,41 +189,18 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--muted);
-    padding: 10px 2px;
+    padding: 10px 2px 4px;
     display: flex;
     justify-content: space-between;
   }
 
-  /* Status row */
-  .status {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 40px;
-    margin-bottom: 80px;
-    opacity: 0;
-    animation: rise 0.8s ease-out 0.7s forwards;
-  }
-
-  .dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--accent);
-    flex-shrink: 0;
-    animation: pulse 2.6s ease-in-out infinite;
-  }
-
-  .status-text {
+  .plate-explanation {
     font-family: 'Inter', sans-serif;
     font-size: 13px;
     color: var(--muted);
-    letter-spacing: 0.01em;
-  }
-
-  .status-text strong {
-    color: var(--ink);
-    font-weight: 500;
+    line-height: 1.55;
+    padding: 0 2px 4px;
+    max-width: 700px;
   }
 
   /* Footer */
@@ -151,22 +217,40 @@
     letter-spacing: 0.02em;
   }
 
-  footer a {
+  .social-icons {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+  }
+
+  .social-icons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
     color: var(--muted);
     text-decoration: none;
-    border-bottom: 1px solid var(--line);
-    padding-bottom: 1px;
     transition: color 0.2s, border-color 0.2s;
   }
 
-  footer a:hover {
+  .social-icons a:hover {
     color: var(--ink);
     border-color: var(--ink);
   }
 
-  .footer-links {
-    display: flex;
-    gap: 22px;
+  .social-icons img {
+    width: 15px;
+    height: 15px;
+    object-fit: contain;
+    filter: grayscale(1) opacity(0.75);
+    transition: filter 0.2s;
+  }
+
+  .social-icons a:hover img {
+    filter: grayscale(0) opacity(1);
   }
 
   @keyframes rise {
@@ -174,18 +258,14 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.35; }
-  }
-
   @media (prefers-reduced-motion: reduce) {
-    .eyebrow, h1, .tagline, .plate, .status { animation: none; opacity: 1; }
-    .dot { animation: none; }
+    .eyebrow, h1, .tagline, .signup-box, .plate { animation: none; opacity: 1; }
   }
 
   @media (max-width: 560px) {
     .eyebrow { padding-top: 48px; }
+    .hero-row { margin-top: 18px; }
+    .signup-box { flex: 1 1 100%; }
     footer { flex-direction: column; gap: 14px; align-items: flex-start; }
   }
 </style>
@@ -197,33 +277,97 @@
 
     <h1>Look behind the curtain!</h1>
 
-    <p class="tagline">
-      Built from original mathematically accurate renderings 
-      of the formulas that describe our universe.
-      No AI was used to generate the images.
-      
-      A visual exploration of the forces that power our universe.
-    </p>
+    <div class="hero-row">
+      <p class="tagline">
+        For thousands of years, humans have been pulling back the curtain to understand
+        the forces that power everything around us. We explain these rules in the language
+        of mathematics. Many of these concepts, when rendered with the right colors,
+        textures, and parameters, result in beautiful images.
+        <br><br>
+        Below are samples of the images that can be featured in the book. All are original,
+        mathematically accurate renderings of equations that describe our universe. No AI
+        was used in the creation of these images. A visual exploration of the forces that
+        power our universe!
+      </p>
 
-    <div class="plate">
-      <img src="gray_scott.png" alt="Mixing two chemicals of different concentrations">
-      <div class="plate-caption">
-        <span>Plate study, Gray-Scott reaction-diffusion</span>
-        <span>@Bernardo Zamora, 2024</span>
+      <div class="signup-box">
+        <div class="signup-eyebrow">Coming soon</div>
+        <p class="signup-text">A book of these images is coming. Get notified when it is available.</p>
+
+        <!-- Buttondown static form: replace YOUR_USERNAME with your Buttondown username -->
+        <form class="signup-form"
+              action="https://buttondown.email/api/emails/embed-subscribe/bernardozamora"
+              method="post"
+              target="popupwindow"
+              onsubmit="window.open('https://buttondown.email/bernardozamora', 'popupwindow')">
+          <input type="email" name="email" placeholder="you@email.com" required>
+          <button type="submit">Notify me</button>
+        </form>
+        <p class="signup-note">No spam. Only updates about the book, and final email when the book is out.</p>
       </div>
     </div>
 
-    <div class="status">
-      <span class="dot"></span>
-      <span class="status-text"><strong>Book being written</strong> - more to come in the future!</span>
+    <div class="plates">
+      <div class="plate">
+        <img src="Image1.png" alt="Mixing two chemicals of different concentrations">
+        <div class="plate-caption">
+          <span>Gray-Scott reaction-diffusion</span>
+          <span>@Bernardo Zamora, 2024</span>
+        </div>
+        <p class="plate-explanation">Two chemicals of different concentration, that react and when they diffuse they produce these organic patterns. They are calculated using two partial differential equations.</p>
+      </div>
+
+      <div class="plate">
+        <img src="Image2.png" alt="Plate study two">
+        <div class="plate-caption">
+          <span>Hybrid fractal Brownian motion (fBM)</span>
+          <span>@Bernardo Zamora, 2025</span>
+        </div>
+        <p class="plate-explanation">Adding several layers of 'mathematical noise' results in natural-looking patterns, like clouds or marble. Calculated by summing layers of noise at different amplitudes and frequencies.</p>
+      </div>
+
+      <div class="plate">
+        <img src="Image3.png" alt="Plate study three">
+        <div class="plate-caption">
+          <span>Differential Growth</span>
+          <span>@Bernardo Zamora, 2025</span>
+        </div>
+        <p class="plate-explanation">Coral, fungi and root growth is emulated with a technique where connected points pull toward their neighbors but push away from nearby crowded areas, with new points sprouting wherever space opens up.</p>
+      </div>
+
+      <div class="plate">
+        <img src="Image4.png" alt="Plate study four">
+        <div class="plate-caption">
+          <span>Gas Flow</span>
+          <span>@Bernardo Zamora, 2026</span>
+        </div>
+        <p class="plate-explanation">When a gas moves past a solid object it can result in a swirling turbulent pattern or calmer 'laminar flow' depending on the speed and viscosity. 40 trillion calculations later (true number) we get this image.</p>
+      </div>
+
+      <div class="plate">
+        <img src="Image5.png" alt="Plate study five">
+        <div class="plate-caption">
+          <span>Randomness with memory</span>
+          <span>@Bernardo Zamora, 2026</span>
+        </div>
+        <p class="plate-explanation">While complete randomness exists at the quantum level, nature frequently uses 'smooth' randomness—like the rolling contours of terrain. This organic variation is simulated here using 'Perlin noise'.</p>
+      </div>
     </div>
   </div>
 
   <footer>
     <span>&copy; 2020-2026 Bernardo Zamora</span>
-    <div class="footer-links">
-      <a href="https://instagram.com/bernardozamora.art" target="_blank" rel="noopener">Instagram</a>
-      <a href="https://pinterest.com/bernardozamora" target="_blank" rel="noopener">Pinterest</a>
+    <div class="social-icons">
+      <!-- Replace src with real logo files once uploaded, e.g. /assets/instagram.svg -->
+      <a href="https://instagram.com/bernardozamora.art" target="_blank" rel="noopener" aria-label="Instagram">
+        <img src="instagram.svg" alt="Instagram">
+      </a>
+      <a href="https://pinterest.com/bernardozamora" target="_blank" rel="noopener" aria-label="Pinterest">
+        <img src="pinterest.svg" alt="Pinterest">
+      </a>
+      <a href="https://tiktok.com/@bernardozamora" target="_blank" rel="noopener" aria-label="TikTok">
+        <img src="tiktok.svg" alt="TikTok">
+      </a>
     </div>
   </footer>
 
