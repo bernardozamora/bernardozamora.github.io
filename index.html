@@ -250,20 +250,20 @@
 
   .plate {
     position: relative;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
     opacity: 0;
     animation: rise 0.9s ease-out 0.55s forwards;
   }
 
   .plate img {
-    width: 100%;
-    display: block;
-    height: clamp(220px, 34vw, 420px);
-    object-fit: cover;
-    object-position: center 40%;
-    filter: saturate(0.92);
-  }
+      width: 100%;
+      display: block;
+      height: clamp(220px, 34vw, 420px);
+      object-fit: cover;
+      object-position: center 40%;
+      filter: saturate(0.92);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
 
   .plate-caption {
     font-family: 'Inter', sans-serif;
