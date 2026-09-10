@@ -40,4 +40,5 @@ To add a new mathematical visualization plate:
 3. Paste the block into the .plates container section within index.html
 
 
-## All design rules, colors (--ink, --paper, --accent, etc.), typography imports (Source Serif 4 and Inter), and responsive media queries are contained within the <style> block in the <head> of index.html[cite: 2]. Modify these CSS variables or rules to alter the global aesthetic.
+## Styles
+All design rules, colors (--ink, --paper, --accent, etc.), typography imports (Source Serif 4 and Inter), and responsive media queries are contained within the <style> block in the <head> of index.html. Modify these CSS variables or rules to alter the global aesthetic.
