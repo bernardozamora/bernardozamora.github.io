@@ -1,10 +1,10 @@
-# WARNING ****
+## WARNING ****
 DO NOT rename the repository (bernardozamora.github.io) to something else.
 This will break the website rendering.
 
-# Website Architecture & Maintenance Guide
+## Website Architecture & Maintenance Guide
 
-This repository powers [bernardozamora.com](https://bernardozamora.com) using **GitHub Pages**[cite: 1, 2]. 
+This repository powers [bernardozamora.com](https://bernardozamora.com) using **GitHub Pages**.
 
 ## High-Level Architecture
 
@@ -20,9 +20,9 @@ When you push changes to the `main` (or `master`) branch, GitHub Pages automatic
 ## How to Update the Website
 
 ### 1. Changing Text, Copy, or Descriptions
-All text—including the main headline, introductory bio, upcoming book details, plate titles, and scientific explanations—lives directly inside `index.html`[cite: 2]. 
+All text—including the main headline, introductory bio, upcoming book details, plate titles, and scientific explanations—lives directly inside `index.html`. 
 * Open `index.html` in any text editor or GitHub's web editor.
-* Locate the relevant text block (e.g., `<h1` for the title, `.tagline` for the bio, or `.plate-explanation` for image descriptions)[cite: 2].
+* Locate the relevant text block (e.g., `<h1` for the title, `.tagline` for the bio, or `.plate-explanation` for image descriptions).
 * Edit the text, save, and commit/push the file to update the live site.
 
 ### 2. Adding or Replacing Images (Plates)
@@ -40,4 +40,4 @@ To add a new mathematical visualization plate:
 3. Paste the block into the .plates container section within index.html
 
 
-### All design rules, colors (--ink, --paper, --accent, etc.), typography imports (Source Serif 4 and Inter), and responsive media queries are contained within the <style> block in the <head> of index.html[cite: 2]. Modify these CSS variables or rules to alter the global aesthetic.
+## All design rules, colors (--ink, --paper, --accent, etc.), typography imports (Source Serif 4 and Inter), and responsive media queries are contained within the <style> block in the <head> of index.html[cite: 2]. Modify these CSS variables or rules to alter the global aesthetic.
