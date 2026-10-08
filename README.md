@@ -15,6 +15,8 @@ The website is a static site consisting entirely of HTML and assets, requiring n
 
 When you push changes to the `main` (or `master`) branch, GitHub Pages automatically publishes the root directory contents, serving them live to your custom domain via DNS records.
 
+I'm using Brevo (brevo.com) to manage capturing emails (and later send some emails with the progress).
+
 ## How to Update the Website
 
 ### 1. Changing Text, Copy, or Descriptions
