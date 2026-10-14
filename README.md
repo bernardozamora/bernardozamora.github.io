@@ -11,7 +11,8 @@ This repository powers [bernardozamora.com](https://bernardozamora.com) using **
 The website is a static site consisting entirely of HTML and assets, requiring no build steps, databases, or server-side code:
 - **`index.html`**: Contains the complete structure, inline CSS styles, descriptive text, image plates, and the Brevo email subscription script.
 - **`CNAME`**: A single-line configuration file containing `bernardozamora.com`, which instructs GitHub Pages to map the custom domain to this repository.
-- **Image & Icon Assets**: High-resolution PNG files (e.g., `Image1_watermark.png`) and vector icons (`instagram.svg`, `pinterest.svg`) stored directly in the repository root and loaded relatively via `index.html`.
+- **Image & Icon Assets**: Clean originals live in **`Originals/`** (never referenced by the site). **`Watermarked/`** holds the generated, watermarked copies that `index.html` actually shows. Vector icons (`instagram.svg`, `pinterest.svg`) sit in the repository root.
+- **`scripts/watermark.py`**: Generates `Watermarked/` from `Originals/` (see below).
 
 When you push changes to the `main` (or `master`) branch, GitHub Pages automatically publishes the root directory contents, serving them live to your custom domain via DNS records.
 
@@ -27,11 +28,11 @@ All text—including the main headline, introductory bio, upcoming book details,
 
 ### 2. Adding or Replacing Images (Plates)
 To add a new mathematical visualization plate:
-1. Export your optimized high-resolution image as a PNG and add it to the root of the repository.
+1. Export your high-resolution image as a PNG and add it to `Originals/`, then run `python scripts/watermark.py` (needs `pip install Pillow numpy`) to create its watermarked copy in `Watermarked/`. The look (text, opacity, angle, size) is configured at the top of the script. To rebuild a single image: `python scripts/watermark.py Image3_watermark.png`.
 2. In `index.html`, copy an existing `.plate` HTML block:
    ```html
    <div class="plate">
-     <img src="YourNewImage_watermark.png" alt="Description of the image for accessibility">
+     <img src="Watermarked/YourNewImage_watermark.png" alt="Description of the image for accessibility">
      <div class="plate-caption">
        <span>Title of the Plate</span>
      </div>
