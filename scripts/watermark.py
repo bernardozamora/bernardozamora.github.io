@@ -37,13 +37,23 @@ LIGHT = (255, 255, 255)
 DARK = (0, 0, 0)
 # Images where the mark still looked too strong. Their opacity is multiplied by
 # LOWER_FACTOR (0.55 = about half as strong). Add or remove image numbers freely;
-# for finer control use per-image factors in IMAGE_FACTORS, e.g. {"Image3": 0.4}.
+# for finer control use per-image factors in IMAGE_FACTORS, e.g. {3: 0.4}.
 LOWER_FACTOR = 0.55
 LOWER_IMAGES = {30, 3, 25, 8, 5, 24, 36, 13, 35, 18, 17, 19, 22, 31, 37, 33}
 # Images that need a stronger mark: opacity is multiplied by HIGHER_FACTOR (1.5 = 50% stronger).
 HIGHER_FACTOR = 1.5
 HIGHER_IMAGES = {40, 28}
-IMAGE_FACTORS = {}      # exact file stem -> factor; wins over LOWER_IMAGES
+# Per-image multipliers keyed by image number; these win over the groups above.
+IMAGE_FACTORS = {
+    # already in LOWER_IMAGES (0.55), reduced further
+    22: 0.4, 19: 0.4, 18: 0.4, 13: 0.4, 24: 0.4, 8: 0.4, 25: 0.4,
+    # newly reduced
+    21: 0.55, 14: 0.55,
+    # Image40 was 1.5, reduced
+    40: 1.15,
+    # increased
+    2: 1.4,
+}
 LOCAL_BLUR_RATIO = 1.0  # how widely brightness is averaged, as a multiple of the font size
 MAX_BOOST = 1.0         # >1.0 raises opacity over mid-tone areas (1.0 = off; 1.3 = stronger there)
 
@@ -105,12 +115,13 @@ def build_mask(width, height, args):
 
 def opacity_for(path, args):
     """Base opacity, adjusted for images listed in IMAGE_FACTORS / LOWER_IMAGES / HIGHER_IMAGES."""
-    if path.stem in IMAGE_FACTORS:
-        return args.opacity * IMAGE_FACTORS[path.stem]
     match = re.match(r"Image(\d+)(?:_|$)", path.stem)
-    if match and int(match.group(1)) in LOWER_IMAGES:
+    number = int(match.group(1)) if match else None
+    if number in IMAGE_FACTORS:
+        return args.opacity * IMAGE_FACTORS[number]
+    if number in LOWER_IMAGES:
         return args.opacity * LOWER_FACTOR
-    if match and int(match.group(1)) in HIGHER_IMAGES:
+    if number in HIGHER_IMAGES:
         return args.opacity * HIGHER_FACTOR
     return args.opacity
 
