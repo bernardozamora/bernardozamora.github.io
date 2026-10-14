@@ -15,6 +15,7 @@
     --accent: #5c6b73;
     --muted: #6b6a64;
     --card: #f2f1ec;
+    --cta: #b45309;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -95,22 +96,37 @@
 
   /* Email signup card */
   .signup-box {
-    flex: 0 1 320px;
+    flex: 0 1 340px;
     min-width: 260px;
-    border: 1px solid var(--line);
-    background: var(--card);
+    border: 1px solid var(--cta);
+    border-top: 4px solid var(--cta);
+    background: #fff;
     padding: 24px;
+    box-shadow: 0 8px 28px rgba(180, 83, 9, 0.18);
     opacity: 0;
     animation: rise 0.8s ease-out 0.5s forwards;
   }
 
   .signup-eyebrow {
+    display: inline-block;
     font-family: 'Inter', sans-serif;
     font-size: 11px;
+    font-weight: 500;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 10px;
+    color: var(--cta);
+    background: rgba(180, 83, 9, 0.09);
+    padding: 4px 9px;
+    border-radius: 2px;
+    margin-bottom: 12px;
+  }
+
+  .signup-title {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 600;
+    font-size: 1.6rem;
+    line-height: 1.15;
+    margin-bottom: 8px;
   }
 
   .signup-text {
@@ -125,37 +141,6 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-  }
-
-  .signup-form input[type="email"] {
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    padding: 10px 12px;
-    border: 1px solid var(--line);
-    background: var(--paper);
-    color: var(--ink);
-    outline: none;
-  }
-
-  .signup-form input[type="email"]:focus {
-    border-color: var(--accent);
-  }
-
-  .signup-form button {
-    font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    padding: 10px 12px;
-    background: var(--accent);
-    color: var(--paper);
-    border: none;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-
-  .signup-form button:hover {
-    background: var(--ink);
   }
 
   .signup-note {
@@ -210,19 +195,38 @@
 
   .signup-form button {
     font-family: 'Inter', sans-serif;
-    font-size: 13px;
+    font-size: 14px;
+    font-weight: 500;
     letter-spacing: 0.04em;
-    text-transform: uppercase;
-    padding: 10px 12px;
-    background: var(--accent);
-    color: var(--paper);
+    padding: 14px 16px;
+    background: var(--cta);
+    color: #fff;
     border: none;
+    border-radius: 2px;
     cursor: pointer;
-    transition: background 0.2s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  }
+
+  .signup-form button .arrow {
+    display: inline-block;
+    margin-left: 6px;
+    transition: transform 0.2s;
   }
 
   .signup-form button:hover {
     background: var(--ink);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+  }
+
+  .signup-form button:hover .arrow {
+    transform: translateX(4px);
+  }
+
+  .signup-form button:focus-visible {
+    outline: 3px solid var(--cta);
+    outline-offset: 2px;
   }
 
   .signup-form button:disabled {
@@ -237,6 +241,24 @@
     width: 1px;
     height: 1px;
     opacity: 0;
+  }
+
+  /* Wide, horizontal copy of the signup card shown below the images */
+  .signup-box--wide {
+    flex: none;
+    width: 100%;
+    margin-bottom: 80px;
+    padding: 28px 32px;
+    display: grid;
+    grid-template-columns: 1fr minmax(300px, 380px);
+    gap: 16px 48px;
+    align-items: center;
+  }
+
+  .signup-box--wide .signup-text { margin-bottom: 0; max-width: 480px; }
+
+  @media (max-width: 760px) {
+    .signup-box--wide { grid-template-columns: 1fr; padding: 24px; }
   }
 
   /* Image plates */
@@ -264,6 +286,55 @@
       border-top: 1px solid var(--line);
       border-bottom: 1px solid var(--line);
     }
+
+  .plate img { cursor: zoom-in; }
+
+  /* Lightbox: click an image to see it full size, uncropped */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 14px;
+    padding: 24px;
+    background: rgba(12, 12, 12, 0.92);
+    cursor: zoom-out;
+  }
+
+  .lightbox.is-open { display: flex; }
+
+  .lightbox img {
+    max-width: 100%;
+    max-height: calc(100vh - 90px);
+    object-fit: contain;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  }
+
+  .lightbox-caption {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: #cfcdc6;
+    max-width: 800px;
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 14px;
+    right: 18px;
+    font-family: 'Inter', sans-serif;
+    font-size: 30px;
+    line-height: 1;
+    color: #fff;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px 10px;
+  }
 
   .plate-caption {
     font-family: 'Inter', sans-serif;
@@ -389,11 +460,12 @@
 
       <div class="signup-box">
         <div class="signup-eyebrow">Coming (likely) in 2027</div>
+        <h2 class="signup-title">Be the first to know</h2>
         <p class="signup-text">A book is coming with these (and hundreds more images). Get notified when it is available.</p>
 
-        <div id="signup-message" class="signup-message" role="status"></div>
+        <div class="signup-message" role="status"></div>
 
-        <form id="sib-form" class="signup-form" method="POST"
+        <form class="signup-form" method="POST"
               action="https://756a5723.sibforms.com/serve/MUIFAJGdU889PT1XqfQNI5hLbaB0JrPLNY0pCgwLroV9O4xbFycEG6cTSFjhhY-D64czN7l43FzqGd5eSZ8e-ZSqfaIruooArSSwIFj0zuf4yEPuZ9TuadCxBq9iBY6E1dIwdzeGb-U4Vr4fNKWg9VyUm4PrDJUFKQOso_9kgyTNPaMzIe36WGPtvPLQVBQXwpbhCypY-Xi8dnjv5g=="
               data-type="subscription">
 
@@ -401,51 +473,15 @@
           <input type="text" name="email_address_check" value="" class="hp-field" tabindex="-1" autocomplete="off">
           <input type="hidden" name="locale" value="en">
 
-          <button type="submit">Notify me</button>
+          <button type="submit">Get book updates<span class="arrow" aria-hidden="true">&rarr;</span></button>
         </form>
         <p class="signup-note">No spam. Only updates about the book, and final email when the book is out.</p>
-
-        <script>
-          (function () {
-            var form = document.getElementById('sib-form');
-            var msg = document.getElementById('signup-message');
-            var btn = form.querySelector('button[type="submit"]');
-
-            form.addEventListener('submit', function (e) {
-              e.preventDefault();
-
-              var email = form.querySelector('input[name="EMAIL"]').value.trim();
-              if (!email) return;
-
-              btn.disabled = true;
-              btn.textContent = 'Sending…';
-              msg.className = 'signup-message';
-              msg.textContent = '';
-
-              fetch(form.action, {
-                method: 'POST',
-                mode: 'no-cors',
-                body: new FormData(form)
-              }).then(function () {
-                msg.textContent = "You're subscribed — thanks! Check your inbox to confirm. Check your spam folder.";
-                msg.className = 'signup-message is-visible is-success';
-                form.reset();
-              }).catch(function () {
-                msg.textContent = 'Something went wrong. Please try again in a moment.';
-                msg.className = 'signup-message is-visible is-error';
-              }).finally(function () {
-                btn.disabled = false;
-                btn.textContent = 'Notify me';
-              });
-            });
-          })();
-        </script>
       </div>
     </div>
 
     <div class="plates">
       <div class="plate">
-        <img src="Image1_watermark.png" alt="Intricate organic pattern generated by mixing two simulated chemicals">
+        <img src="Watermarked/Image1_watermark.png" alt="Intricate organic pattern generated by mixing two simulated chemicals">
         <div class="plate-caption">
           <span>Gray-Scott reaction-diffusion: mixing two chemicals</span>
           <!-- <span>@Bernardo Zamora, 2024</span> -->
@@ -454,7 +490,7 @@
       </div>
 
       <div class="plate">
-        <img src="Image2_watermark.png" alt="A natural-looking marble texture created with mathematical noise">
+        <img src="Watermarked/Image2_watermark.png" alt="A natural-looking marble texture created with mathematical noise">
         <div class="plate-caption">
           <span>Hybrid Fractional Brownian motion (fBM): marble patterns</span>
           <!-- <span>@Bernardo Zamora, 2025</span> -->
@@ -463,7 +499,7 @@
       </div>
 
       <div class="plate">
-        <img src="Image25_watermark.png" alt="A 3D mathematical isosurface rendering of a hydrogen atom orbital on a bright lime-green background. The symmetrical, fragmented geometric structure features alternating nested hemispherical shells and discs in white and deep forest-green, aligned horizontally along a central axis.">
+        <img src="Watermarked/Image25_watermark.png" alt="A 3D mathematical isosurface rendering of a hydrogen atom orbital on a bright lime-green background. The symmetrical, fragmented geometric structure features alternating nested hemispherical shells and discs in white and deep forest-green, aligned horizontally along a central axis.">
         <div class="plate-caption">
           <span>Molecular Orbitals: Geometric Clouds of Probability</span>
           <!-- <span>@Bernardo Zamora, 2026</span> -->
@@ -472,7 +508,7 @@
       </div>
 
       <div class="plate">
-        <img src="Image27_watermark.png" alt="A high-contrast, black-and-white generative art simulation of a slime mold network. The pattern features a dense, central cluster of organic, bubble-like cellular compartments that transition into thin, delicate branching filaments radiating outward like a spider web against a stark white background.">
+        <img src="Watermarked/Image27_watermark.png" alt="A high-contrast, black-and-white generative art simulation of a slime mold network. The pattern features a dense, central cluster of organic, bubble-like cellular compartments that transition into thin, delicate branching filaments radiating outward like a spider web against a stark white background.">
         <div class="plate-caption">
           <span>Physarum Simulation: Emergent Intelligence</span>
           <!-- <span>@Bernardo Zamora, 2026</span> -->
@@ -481,7 +517,7 @@
       </div>
 
       <div class="plate">
-        <img src="Image39_watermark.png" alt="A triple pendulum chaotic path visualization on a black background. Overlapping, translucent ribbon-like trails in yellow, white, and blue-gray sweep across the center, drifting leftward like ghost traces.">
+        <img src="Watermarked/Image39_watermark.png" alt="A triple pendulum chaotic path visualization on a black background. Overlapping, translucent ribbon-like trails in yellow, white, and blue-gray sweep across the center, drifting leftward like ghost traces.">
         <div class="plate-caption">
           <span>The Triple Pendulum: Chaotic Wakes</span>
           <!-- <span>@Bernardo Zamora, 2026</span> -->
@@ -490,7 +526,7 @@
       </div>
 
       <div class="plate">
-        <img src="Image3_watermark.png" alt="An orange, coral-like structures growing outwards from a central white box">
+        <img src="Watermarked/Image3_watermark.png" alt="An orange, coral-like structures growing outwards from a central white box">
         <div class="plate-caption">
           <span>Differential Growth: how living organisms grow</span>
           <!-- <span>@Bernardo Zamora, 2025</span> -->
@@ -499,7 +535,7 @@
       </div>
 
       <div class="plate">
-        <img src="Image30_watermark.png" alt="A high-resolution escape-time fractal known as a Manowar Julia set. The image features a dark navy and deep maroon background with a stylized, flowing, dual-lobed central figure. The internal boundary of the fractal is intricately detailed with a striped color palette that transitions sharply from deep black and dark orange to vibrant golden yellow and stark off-white, creating a layered, woven appearance.">
+        <img src="Watermarked/Image30_watermark.png" alt="A high-resolution escape-time fractal known as a Manowar Julia set. The image features a dark navy and deep maroon background with a stylized, flowing, dual-lobed central figure. The internal boundary of the fractal is intricately detailed with a striped color palette that transitions sharply from deep black and dark orange to vibrant golden yellow and stark off-white, creating a layered, woven appearance.">
         <div class="plate-caption">
           <span>Manowar Julia: Iterated Chaos</span>
           <!-- <span>@Bernardo Zamora, 2026</span> -->
@@ -508,7 +544,7 @@
       </div>
 
       <div class="plate">
-        <img src="Image38_watermark.png" alt="A high-resolution, monochrome zoom of the Mandelbrot set fractal. The image features a striking zebra-stripe aesthetic composed of alternating solid black and smooth, gradient-shaded white and gray undulating bars. A jagged, infinitely complex frontier waves horizontally across the center, revealing a microscopic, pitch-black cardioid silhouette of a mini Mandelbrot bulb nestled deep within the intricate, self-similar folds.">
+        <img src="Watermarked/Image38_watermark.png" alt="A high-resolution, monochrome zoom of the Mandelbrot set fractal. The image features a striking zebra-stripe aesthetic composed of alternating solid black and smooth, gradient-shaded white and gray undulating bars. A jagged, infinitely complex frontier waves horizontally across the center, revealing a microscopic, pitch-black cardioid silhouette of a mini Mandelbrot bulb nestled deep within the intricate, self-similar folds.">
         <div class="plate-caption">
           <span>The Mandelbrot Set: infinite and never-repeating detail</span>
           <!-- <span>@Bernardo Zamora, 2026</span> -->
@@ -517,7 +553,7 @@
       </div>
 
       <div class="plate">
-        <img src="Image8_watermark.png" alt="Yellow background with a diagonal line, in rich yellow tones">
+        <img src="Watermarked/Image8_watermark.png" alt="Yellow background with a diagonal line, in rich yellow tones">
         <div class="plate-caption">
           <span>Complex numbers: required to explain many natural processes</span>
           <!-- <span>@Bernardo Zamora, 2026</span> -->
@@ -526,7 +562,7 @@
       </div>
       
       <div class="plate">
-        <img src="Image4_watermark.png" alt="Swirling white gas currents moving against a stark black background">
+        <img src="Watermarked/Image4_watermark.png" alt="Swirling white gas currents moving against a stark black background">
         <div class="plate-caption">
           <span>Navier-Stokes equations: simulating gas flows</span>
           <!-- <span>@Bernardo Zamora, 2026</span> -->
@@ -535,7 +571,7 @@
       </div>
     
       <div class="plate">
-        <img src="Image5_watermark.png" alt="Smoothly undulating, organic landscape pattern generated by Perlin noise">
+        <img src="Watermarked/Image5_watermark.png" alt="Smoothly undulating, organic landscape pattern generated by Perlin noise">
         <div class="plate-caption">
           <span>Perlin Noise: generate randomness with memory</span>
           <!-- <span>@Bernardo Zamora, 2026</span> -->
@@ -544,7 +580,7 @@
       </div>
 
      <div class="plate">
-        <img src="Image7_watermark.png" alt="Crystal Klein bottle with yellow liquid pouring in, with black background">
+        <img src="Watermarked/Image7_watermark.png" alt="Crystal Klein bottle with yellow liquid pouring in, with black background">
         <div class="plate-caption">
           <span>Klein Bottle: A surface with no inside or outside</span>
           <!-- <span>@Bernardo Zamora, 2026</span> -->
@@ -553,7 +589,7 @@
       </div>
 
       <div class="plate">
-        <img src="Image10_watermark.png" alt="A digital render of a Chladni plate showing geometric vibration patterns in black, red, and white.">
+        <img src="Watermarked/Image10_watermark.png" alt="A digital render of a Chladni plate showing geometric vibration patterns in black, red, and white.">
         <div class="plate-caption">
           <span>Chladni Plates: Sound waves made visible</span>
           <!-- <span>@Bernardo Zamora, 2026</span> -->
@@ -562,7 +598,7 @@
       </div>
 
      <div class="plate">
-        <img src="Image24_watermark.png" alt="Three different colored sections">
+        <img src="Watermarked/Image24_watermark.png" alt="Three different colored sections">
         <div class="plate-caption">
           <span>Sphere Eversion: Turning a sphere inside-out without creases or breaks</span>
           <!-- <span>@Bernardo Zamora, 2026</span> -->
@@ -572,7 +608,7 @@
 
 
       <div class="plate">
-        <img src="Image26_watermark.png" alt="A detailed astrophoto-style simulation against deep black space, capturing 16 million stars in a cosmic dance during a close gravitational pass between the Milky Way and Andromeda galaxies. A bright bridge of starlight connects two distinct luminous galactic cores, with sweeping, asymmetric tidal streams of stellar dust curling outward into the dark.">
+        <img src="Watermarked/Image26_watermark.png" alt="A detailed astrophoto-style simulation against deep black space, capturing 16 million stars in a cosmic dance during a close gravitational pass between the Milky Way and Andromeda galaxies. A bright bridge of starlight connects two distinct luminous galactic cores, with sweeping, asymmetric tidal streams of stellar dust curling outward into the dark.">
         <div class="plate-caption">
           <span>Galaxies Colliding: Gravity Creates a Cosmic Dance</span>
           <!-- <span>@Bernardo Zamora, 2026</span> -->
@@ -582,7 +618,7 @@
 
       
       <div class="plate">
-        <img src="Image11_watermark.png" alt="Image of hyperbolic tesselation, showing a set of Mexican talavera-looking tiles in white background.">
+        <img src="Watermarked/Image11_watermark.png" alt="Image of hyperbolic tesselation, showing a set of Mexican talavera-looking tiles in white background.">
         <div class="plate-caption">
           <span>Hyperbolic Tessellation: Filling a plane with a repeating shape</span>
           <!-- <span>@Bernardo Zamora, 2026</span> -->
@@ -592,7 +628,7 @@
       
 
       <div class="plate">
-        <img src="Image12_watermark.png" alt="A 3D cellular automaton simulation based on Conway's Game of Life, showing an intricate, organic cluster of glowing light-blue voxels emerging and trailing toward the right against a black background.">
+        <img src="Watermarked/Image12_watermark.png" alt="A 3D cellular automaton simulation based on Conway's Game of Life, showing an intricate, organic cluster of glowing light-blue voxels emerging and trailing toward the right against a black background.">
         <div class="plate-caption">
           <span>Game of Life: Emergent complexity from simple rules</span>
           <!-- <span>@Bernardo Zamora, 2026</span> -->
@@ -601,7 +637,7 @@
       </div>
 
       <div class="plate">
-        <img src="Image36_watermark.png" alt="A stylized, top-down topographic map visualization of gravitational pull, rendered in a warm, terracota and deep ochre-orange palette. The landscape features deep, tiered concentric circular craters and elevated cones, defined by dark, layered shadow drop-offs. These concentric ring structures represent the gravitational wells of different planetary bodies, transitioning from deep, shadowy depressions into glowing, off-white central peaks.">
+        <img src="Watermarked/Image36_watermark.png" alt="A stylized, top-down topographic map visualization of gravitational pull, rendered in a warm, terracota and deep ochre-orange palette. The landscape features deep, tiered concentric circular craters and elevated cones, defined by dark, layered shadow drop-offs. These concentric ring structures represent the gravitational wells of different planetary bodies, transitioning from deep, shadowy depressions into glowing, off-white central peaks.">
         <div class="plate-caption">
           <span>Gravitational Fields: Equipotential Topography</span>
           <!-- <span>@Bernardo Zamora, 2026</span> -->
@@ -610,7 +646,7 @@
       </div>
       
       <div class="plate">
-        <img src="Image13_watermark.png" alt="A 3D rendering of a single gyroid unit cell against a dark gradient background, showcasing its continuously curving, saddle-shaped surfaces and interlocking channels detailed with a fine, wireframe triangle mesh.">
+        <img src="Watermarked/Image13_watermark.png" alt="A 3D rendering of a single gyroid unit cell against a dark gradient background, showcasing its continuously curving, saddle-shaped surfaces and interlocking channels detailed with a fine, wireframe triangle mesh.">
         <div class="plate-caption">
           <span>The Gyroid: A saddle of minimal surface</span>
           <!-- <span>@Bernardo Zamora, 2026</span> -->
@@ -619,7 +655,7 @@
       </div>
 
       <div class="plate">
-          <img src="Image14_watermark.png" alt="A minimalist vector art piece on a white background showing a continuous black trajectory line weaving chaotically around five small red dots representing planetary masses, evoking the silhouette of a person lying down and looking upward.">
+          <img src="Watermarked/Image14_watermark.png" alt="A minimalist vector art piece on a white background showing a continuous black trajectory line weaving chaotically around five small red dots representing planetary masses, evoking the silhouette of a person lying down and looking upward.">
           <div class="plate-caption">
             <span>Gravity: Chaotic Paths</span>
             <!-- <span>@Bernardo Zamora, 2026</span> -->
@@ -628,7 +664,7 @@
         </div>
 
         <div class="plate">
-          <img src="Image6_watermark.png" alt="A 3D rendering of an organic cluster of cellular structures against a pitch-black background, consisting of transparent, glossy glass-like outer spheres that encapsulate glowing, vibrant green inner cores, resembling microscopic organisms or dividing biological cells.">
+          <img src="Watermarked/Image6_watermark.png" alt="A 3D rendering of an organic cluster of cellular structures against a pitch-black background, consisting of transparent, glossy glass-like outer spheres that encapsulate glowing, vibrant green inner cores, resembling microscopic organisms or dividing biological cells.">
           <div class="plate-caption">
             <span>Random: Complete Chaos</span>
             <!-- <span>@Bernardo Zamora, 2026</span> -->
@@ -637,7 +673,7 @@
         </div>
 
       <div class="plate">
-        <img src="Image35_watermark.png" alt="A high-resolution Lyapunov stability map of the Ikeda attractor set against a soft, pale orange background. The image features a prominent, swooping, crescent-like structure on the left rendered in deep, velvety crimson red and black.">
+        <img src="Watermarked/Image35_watermark.png" alt="A high-resolution Lyapunov stability map of the Ikeda attractor set against a soft, pale orange background. The image features a prominent, swooping, crescent-like structure on the left rendered in deep, velvety crimson red and black.">
         <div class="plate-caption">
           <span>Ikeda Attractor: Lyapunov Stability Map</span>
           <!-- <span>@Bernardo Zamora, 2026</span> -->
@@ -646,7 +682,7 @@
       </div>
             
       <div class="plate">
-        <img src="Image34_watermark.png"
+        <img src="Watermarked/Image34_watermark.png"
              alt="A smooth metallic 3D rendering of Boy's surface, a twisted self-intersecting shape from topology.">
         <div class="plate-caption">
           <span>Boy's Surface: a non-orientable 3D shape</span>
@@ -658,7 +694,7 @@
       </div>
             
       <div class="plate">
-          <img src="Image18_watermark.png" alt="A computer render of a circular pool of black ferrofluid forming a cluster of sharp, uniform spikes due to a magnetic field, showing realistic metallic highlights and a soft reflection on a dark, glossy surface.">
+          <img src="Watermarked/Image18_watermark.png" alt="A computer render of a circular pool of black ferrofluid forming a cluster of sharp, uniform spikes due to a magnetic field, showing realistic metallic highlights and a soft reflection on a dark, glossy surface.">
           <div class="plate-caption">
             <span>Ferrofluid: visualizing invisible magnetic fields</span>
             <!-- <span>@Bernardo Zamora, 2026</span> -->
@@ -667,7 +703,7 @@
         </div>
               
       <div class="plate">
-        <img src="Image17_watermark.png" alt="A delicate, abstract monochrome fractal generated via an Iterated Function System on a white background, featuring sweeping, skeletal curves and parallel vertical ridges that evoke the organic structure of a marine sailfin or prehistoric fossil.">
+        <img src="Watermarked/Image17_watermark.png" alt="A delicate, abstract monochrome fractal generated via an Iterated Function System on a white background, featuring sweeping, skeletal curves and parallel vertical ridges that evoke the organic structure of a marine sailfin or prehistoric fossil.">
         <div class="plate-caption">
           <span>Iterative Function System: repeatedly applying a function creates organic shapes</span>
           <!-- <span>@Bernardo Zamora, 2026</span> -->
@@ -676,7 +712,7 @@
       </div>
 
       <div class="plate">
-        <img src="Image23_watermark.png" alt="An abstract digital composition featuring a warm, finely grained ochre-orange background, interrupted at the bottom by a broad, undulating semi-circular band made of dozens of thin, parallel white and dark lines that ripple together like geological strata.">
+        <img src="Watermarked/Image23_watermark.png" alt="An abstract digital composition featuring a warm, finely grained ochre-orange background, interrupted at the bottom by a broad, undulating semi-circular band made of dozens of thin, parallel white and dark lines that ripple together like geological strata.">
         <div class="plate-caption">
           <span>Fractional Brownian Motion: Ondulating patterns</span>
           <!-- <span>@Bernardo Zamora, 2026</span> -->
@@ -685,7 +721,7 @@
       </div>
       
       <div class="plate">
-        <img src="Image19_watermark.png" alt="A 3D rendering of a mid-stage sphere eversion against a dark brown background, showcasing an intricate, multi-lobed geometric shape composed of an ivory-colored, semi-transparent triangular wireframe mesh.">
+        <img src="Watermarked/Image19_watermark.png" alt="A 3D rendering of a mid-stage sphere eversion against a dark brown background, showcasing an intricate, multi-lobed geometric shape composed of an ivory-colored, semi-transparent triangular wireframe mesh.">
         <div class="plate-caption">
           <span>Sphere Eversion: Turning a sphere inside-out without creases or breaks</span>
           <!-- <span>@Bernardo Zamora, 2026</span> -->
@@ -694,7 +730,7 @@
       </div>
 
       <div class="plate">
-        <img src="Image22_watermark.png" alt="A 3D rendering of a thick, transparent glass Möbius strip resting on a clean white surface, forming a continuous one-sided loop with a single half twist, its surface etched with rows of black mathematical and scientific equations.">
+        <img src="Watermarked/Image22_watermark.png" alt="A 3D rendering of a thick, transparent glass Möbius strip resting on a clean white surface, forming a continuous one-sided loop with a single half twist, its surface etched with rows of black mathematical and scientific equations.">
         <div class="plate-caption">
           <span>The Möbius Strip: A surface with only one side</span>
           <!-- <span>@Bernardo Zamora, 2026</span> -->
@@ -703,7 +739,7 @@
       </div>
       
       <div class="plate">
-        <img src="Image21_watermark.png" alt="A horizontal, organic 3D structure resembling a textured ochre-orange tube rippling with uneven, bulbous waves against a dark background, its surface detailed with a fine, fabric-like grid mesh that deforms over the undulations.">
+        <img src="Watermarked/Image21_watermark.png" alt="A horizontal, organic 3D structure resembling a textured ochre-orange tube rippling with uneven, bulbous waves against a dark background, its surface detailed with a fine, fabric-like grid mesh that deforms over the undulations.">
         <div class="plate-caption">
           <span>Sound Waves: Moving Particles in a Medium</span>
           <!-- <span>@Bernardo Zamora, 2026</span> -->
@@ -712,7 +748,7 @@
       </div>
     
     <div class="plate">
-      <img src="Image31_watermark.png" alt="A directed graph visualization of the Collatz conjecture against a clean white background. The paths are constructed from small, densely arranged dots connected by light gray lines, forming a wide, branching tree structure that flows from left to right.">
+      <img src="Watermarked/Image31_watermark.png" alt="A directed graph visualization of the Collatz conjecture against a clean white background. The paths are constructed from small, densely arranged dots connected by light gray lines, forming a wide, branching tree structure that flows from left to right.">
       <div class="plate-caption">
         <span>Collatz Conjecture: One of math's most famous unsolved problems</span>
         <!-- <span>@Bernardo Zamora, 2026</span> -->
@@ -721,7 +757,7 @@
     </div>
       
       <div class="plate">
-        <img src="Image20_watermark.png" alt="An intricate, highly symmetrical complex polynomial root plot on a black background, featuring an outer ring of eight glowing, translucent blue wispy structures connected by thin amber threads, surrounding an inner core of overlapping golden circular orbits and a dark center.">
+        <img src="Watermarked/Image20_watermark.png" alt="An intricate, highly symmetrical complex polynomial root plot on a black background, featuring an outer ring of eight glowing, translucent blue wispy structures connected by thin amber threads, surrounding an inner core of overlapping golden circular orbits and a dark center.">
         <div class="plate-caption">
           <span>Polynomial Roots: zeroes of complex equations</span>
           <!-- <span>@Bernardo Zamora, 2026</span> -->
@@ -731,7 +767,7 @@
 
       <div class="plate">
         <div class="plate-images-diptych" style="display: flex; gap: 20px; background: #fff;">
-          <img src="Image37_watermark.png" alt="An abstract mathematical density plot showing two images: one with rich rich orange, tri-lobed floral or propeller shape at the center, another a soft transparent blue 'cloth', both over white background.">
+          <img src="Watermarked/Image37_watermark.png" alt="An abstract mathematical density plot showing two images: one with rich rich orange, tri-lobed floral or propeller shape at the center, another a soft transparent blue 'cloth', both over white background.">
         </div>
         <div class="plate-caption">
           <span>Coordinate Transformations: Mathematical Folding</span>
@@ -741,7 +777,7 @@
       </div>
       
       <div class="plate">
-        <img src="Image28_watermark.png" alt="A highly detailed 3D fluid simulation of a dense plume of smoke rendered in a solid, monochromatic ochre-yellow hue against a pitch-black background. The smoke erupts horizontally from a textured trailing stream on the right, expanding into turbulent, billowing, cloud-like structures with deep crevices and complex organic folds as it moves to the left.">
+        <img src="Watermarked/Image28_watermark.png" alt="A highly detailed 3D fluid simulation of a dense plume of smoke rendered in a solid, monochromatic ochre-yellow hue against a pitch-black background. The smoke erupts horizontally from a textured trailing stream on the right, expanding into turbulent, billowing, cloud-like structures with deep crevices and complex organic folds as it moves to the left.">
         <div class="plate-caption">
           <span>Navier-Stokes: Simulating Smoke</span>
           <!-- <span>@Bernardo Zamora, 2026</span> -->
@@ -750,7 +786,7 @@
       </div>
 
       <div class="plate">
-        <img src="Image32_watermark.png" alt="A simulation of the double-slit experiment split into two halves. On the left, fine blue parallel vertical lines move across a plain white background, representing incoming plane waves. On the right, after passing through two central slits, the waves emerge into a deep blue field as concentric, overlapping ripples, creating a stark white interference pattern of alternating bright fringes and dark gaps.">
+        <img src="Watermarked/Image32_watermark.png" alt="A simulation of the double-slit experiment split into two halves. On the left, fine blue parallel vertical lines move across a plain white background, representing incoming plane waves. On the right, after passing through two central slits, the waves emerge into a deep blue field as concentric, overlapping ripples, creating a stark white interference pattern of alternating bright fringes and dark gaps.">
         <div class="plate-caption">
           <span>The Double-Slit Experiment: Particle or Wave?</span>
           <!-- <span>@Bernardo Zamora, 2026</span> -->
@@ -759,7 +795,7 @@
       </div>
 
       <div class="plate">
-        <img src="Image33_watermark.png" alt="A high-resolution line drawing of Chua's circuit double scroll attractor against a pure white background. The continuous trajectory is rendered in a dark reddish-brown hue, composed of thousands of overlapping, delicate lines that trace out an asymmetrical infinity or butterfly shape. The path tightly spirals around two distinct, dark focal points on the left and right, forming layered, translucent bands that elegantly cross over one another in the center.">
+        <img src="Watermarked/Image33_watermark.png" alt="A high-resolution line drawing of Chua's circuit double scroll attractor against a pure white background. The continuous trajectory is rendered in a dark reddish-brown hue, composed of thousands of overlapping, delicate lines that trace out an asymmetrical infinity or butterfly shape. The path tightly spirals around two distinct, dark focal points on the left and right, forming layered, translucent bands that elegantly cross over one another in the center.">
         <div class="plate-caption">
           <span>Chua's Circuit: Simplest Strange Attractor</span>
           <!-- <span>@Bernardo Zamora, 2026</span> -->
@@ -768,7 +804,7 @@
       </div>
             
       <div class="plate">
-        <img src="Image29_watermark.png" alt="A mathematical 3D projection of an eight-dimensional Calabi-Yau manifold against a black background. The structure forms a complex, multi-lobed starburst shape with translucent, tightly woven wireframe lines that shift in a smooth rainbow gradient from orange and green on the left to violet and soft pink on the right.">
+        <img src="Watermarked/Image29_watermark.png" alt="A mathematical 3D projection of an eight-dimensional Calabi-Yau manifold against a black background. The structure forms a complex, multi-lobed starburst shape with translucent, tightly woven wireframe lines that shift in a smooth rainbow gradient from orange and green on the left to violet and soft pink on the right.">
         <div class="plate-caption">
           <span>Calabi-Yau Manifold: Shadows of a Higher-Dimension</span>
           <!-- <span>@Bernardo Zamora, 2026</span> -->
@@ -777,7 +813,7 @@
       </div>
 
       <div class="plate">
-        <img src="Image40_watermark.png" alt="A macro render of a 3D Apollonian sphere packing against a dark background. Thousands of highly reflective chrome spheres form an intricate, porous lattice structure with hollow circular gaps. Interspersed within the silvery matrix are larger, metallic gold spheres nestled inside select gaps, casting crisp reflections on the neighboring metallic surfaces.">
+        <img src="Watermarked/Image40_watermark.png" alt="A macro render of a 3D Apollonian sphere packing against a dark background. Thousands of highly reflective chrome spheres form an intricate, porous lattice structure with hollow circular gaps. Interspersed within the silvery matrix are larger, metallic gold spheres nestled inside select gaps, casting crisp reflections on the neighboring metallic surfaces.">
         <div class="plate-caption">
           <span>Apollonian Sphere Packing: infinite fill</span>
           <!-- <span>@Bernardo Zamora, 2026</span> -->
@@ -786,11 +822,121 @@
       </div>
       
     </div>
+
+    <div class="signup-box signup-box--wide">
+        <div class="signup-intro">
+          <div class="signup-eyebrow">Coming (likely) in 2027</div>
+        <h2 class="signup-title">Be the first to know</h2>
+        <p class="signup-text">A book is coming with these (and hundreds more images). Get notified when it is available.</p>
+        </div>
+        <div class="signup-action">
+
+        <div class="signup-message" role="status"></div>
+
+        <form class="signup-form" method="POST"
+              action="https://756a5723.sibforms.com/serve/MUIFAJGdU889PT1XqfQNI5hLbaB0JrPLNY0pCgwLroV9O4xbFycEG6cTSFjhhY-D64czN7l43FzqGd5eSZ8e-ZSqfaIruooArSSwIFj0zuf4yEPuZ9TuadCxBq9iBY6E1dIwdzeGb-U4Vr4fNKWg9VyUm4PrDJUFKQOso_9kgyTNPaMzIe36WGPtvPLQVBQXwpbhCypY-Xi8dnjv5g=="
+              data-type="subscription">
+
+          <input type="email" name="EMAIL" placeholder="you@email.com" required>
+          <input type="text" name="email_address_check" value="" class="hp-field" tabindex="-1" autocomplete="off">
+          <input type="hidden" name="locale" value="en">
+
+          <button type="submit">Get book updates<span class="arrow" aria-hidden="true">&rarr;</span></button>
+        </form>
+        <p class="signup-note">No spam. Only updates about the book, and final email when the book is out.</p>
+        </div>
+      </div>
   </div>
 
   <footer>
     <span>&copy; 2020-2026 Bernardo Zamora</span>
   </footer>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Enlarged image">
+    <button class="lightbox-close" type="button" aria-label="Close">&times;</button>
+    <img id="lightbox-img" src="" alt="">
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+  </div>
+
+  <script>
+    (function () {
+      var box = document.getElementById('lightbox');
+      var big = document.getElementById('lightbox-img');
+      var cap = document.getElementById('lightbox-caption');
+      var closeBtn = box.querySelector('.lightbox-close');
+      var lastFocus = null;
+
+      function open(img) {
+        lastFocus = img;
+        big.src = img.currentSrc || img.src;
+        big.alt = img.alt;
+        var title = img.closest('.plate').querySelector('.plate-caption span');
+        cap.textContent = title ? title.textContent : '';
+        box.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+        closeBtn.focus();
+      }
+
+      function close() {
+        box.classList.remove('is-open');
+        document.body.style.overflow = '';
+        big.src = '';
+        if (lastFocus) lastFocus.focus();
+      }
+
+      document.querySelectorAll('.plate img').forEach(function (img) {
+        img.tabIndex = 0;
+        img.setAttribute('role', 'button');
+        img.addEventListener('click', function () { open(img); });
+        img.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(img); }
+        });
+      });
+
+      box.addEventListener('click', close);
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && box.classList.contains('is-open')) close();
+      });
+    })();
+  </script>
+
+  <script>
+    // Handles every signup box on the page (top card and bottom banner).
+    document.querySelectorAll('.signup-box').forEach(function (box) {
+      var form = box.querySelector('.signup-form');
+      var msg = box.querySelector('.signup-message');
+      var btn = form.querySelector('button[type="submit"]');
+      var label = btn.innerHTML;
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        var email = form.querySelector('input[name="EMAIL"]').value.trim();
+        if (!email) return;
+
+        btn.disabled = true;
+        btn.textContent = 'Sending…';
+        msg.className = 'signup-message';
+        msg.textContent = '';
+
+        fetch(form.action, {
+          method: 'POST',
+          mode: 'no-cors',
+          body: new FormData(form)
+        }).then(function () {
+          msg.textContent = "You're subscribed — thanks! Check your inbox to confirm. Check your spam folder.";
+          msg.className = 'signup-message is-visible is-success';
+          form.reset();
+        }).catch(function () {
+          msg.textContent = 'Something went wrong. Please try again in a moment.';
+          msg.className = 'signup-message is-visible is-error';
+        }).finally(function () {
+          btn.disabled = false;
+          btn.innerHTML = label;
+        });
+      });
+    });
+  </script>
 
 </body>
 </html>
