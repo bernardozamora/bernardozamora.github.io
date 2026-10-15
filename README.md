@@ -18,6 +18,13 @@ When you push changes to the `main` (or `master`) branch, GitHub Pages automatic
 
 I'm using Brevo (brevo.com) to manage capturing emails (and later send some emails with the progress).
 
+### Email setup (Brevo + DNS)
+- **Sign-up form:** the site posts to a Brevo form. In the form's *Confirmation* step, **"No confirmation mail"** is selected on purpose. Brevo's built-in confirmation sent from an Apple relay address (`privaterelay.appleid.com`), which failed DMARC and landed in spam.
+- **Welcome email:** sent by a Brevo *Automation* from `book@bernardozamora.com`. The HTML is kept in `emails/welcome-email.html` (paste it into the automation's email block to update it). It includes dark-mode colors.
+- **Domain authentication** (Brevo -> Senders, Domains & Dedicated IPs -> Domains): `bernardozamora.com` is authenticated and branded. DNS records live at Namecheap (Advanced DNS): Brevo code (TXT), DKIM1/DKIM2 (CNAME), DMARC (TXT), and the branding CNAMEs `send`, `r.send` and `img.send`. Don't delete them.
+- **Checking deliverability:** sign up on the site with a fresh address from mail-tester.com and read the report. Remaining known items: the shared Brevo IP is occasionally listed on SpamCop (out of our control; report it to Brevo support), and the 1x1 tracking pixels have no alt text (added by Brevo).
+- The other Brevo sender (an `@privaterelay.appleid.com` address) is unused; don't select it for any form or automation.
+
 ## How to Update the Website
 
 ### 1. Changing Text, Copy, or Descriptions
