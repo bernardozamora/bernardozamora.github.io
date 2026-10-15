@@ -924,7 +924,7 @@
           mode: 'no-cors',
           body: new FormData(form)
         }).then(function () {
-          msg.textContent = "You're subscribed — thanks! Check your inbox to confirm. Check your spam folder.";
+          msg.textContent = "You're subscribed — thanks! A welcome email is on its way. If you don't see it, check your spam folder.";
           msg.className = 'signup-message is-visible is-success';
           form.reset();
         }).catch(function () {
