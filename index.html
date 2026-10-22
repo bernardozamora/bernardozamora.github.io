@@ -1089,7 +1089,7 @@
           mode: 'no-cors',
           body: new FormData(form)
         }).then(function () {
-          msg.innerHTML = "You're subscribed — thanks! A welcome email is on its way. If you don't see it, check your spam folder.<br>While you wait, <a href=\"https://www.instagram.com/bernardozamora.art/\" target=\"_blank\" rel=\"noopener\">watch these equations move on Instagram</a>.";
+          msg.innerHTML = "You're subscribed. Thanks! A welcome email is on its way. If you don't see it, check your spam folder.<br>While you wait, <a href=\"https://www.instagram.com/bernardozamora.art/\" target=\"_blank\" rel=\"noopener\">watch these equations move on Instagram</a>.";
           msg.className = 'signup-message is-visible is-success';
           form.reset();
         }).catch(function () {
